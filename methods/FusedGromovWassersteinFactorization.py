@@ -72,50 +72,50 @@ class FGWF(nn.Module):
                 self.atoms.append(atom)
                 self.embeddings.append(embedding)
         else:
-            num_atoms_per_class = int(self.num_atoms / self.num_classes)
-            counts = np.zeros((self.num_classes,))
-            self.ps = []
-            self.atoms = []
-            self.size_atoms = []
-            self.embeddings = []
-            base_label = []
-            for n in range(prior.__len__()):
-                data = prior.__getitem__(n)
-                graph = data[0]
-                prob = data[1]
-                emb = data[2]
-                gt = int(data[3][0])
-                if counts[gt] < num_atoms_per_class:
-                    self.size_atoms.append(graph.size(0))
-                    atom = nn.Parameter(graph)
-                    embedding = nn.Parameter(emb)
-                    self.ps.append(prob)
-                    self.atoms.append(atom)
-                    self.embeddings.append(embedding)
-                    base_label.append(gt)
-                    counts[gt] += 1
-
-            # num_samples = prior.__len__()
-            # index_samples = list(range(num_samples))
-            # random.shuffle(index_samples)
+            # num_atoms_per_class = int(self.num_atoms / self.num_classes)
+            # counts = np.zeros((self.num_classes,))
             # self.ps = []
             # self.atoms = []
+            # self.size_atoms = []
             # self.embeddings = []
             # base_label = []
-            # for k in range(self.num_atoms):
-            #     idx = index_samples[k]
-            #     data = prior.__getitem__(idx)
+            # for n in range(prior.__len__()):
+            #     data = prior.__getitem__(n)
             #     graph = data[0]
             #     prob = data[1]
             #     emb = data[2]
-            #     gt = data[3]
-            #     self.size_atoms[k] = graph.size(0)
-            #     atom = nn.Parameter(graph)
-            #     embedding = nn.Parameter(emb)
-            #     self.ps.append(prob)
-            #     self.atoms.append(atom)
-            #     self.embeddings.append(embedding)
-            #     base_label.append(gt[0])
+            #     gt = int(data[3][0])
+            #     if counts[gt] < num_atoms_per_class:
+            #         self.size_atoms.append(graph.size(0))
+            #         atom = nn.Parameter(graph)
+            #         embedding = nn.Parameter(emb)
+            #         self.ps.append(prob)
+            #         self.atoms.append(atom)
+            #         self.embeddings.append(embedding)
+            #         base_label.append(gt)
+            #         counts[gt] += 1
+
+            num_samples = prior.__len__()
+            index_samples = list(range(num_samples))
+            random.shuffle(index_samples)
+            self.ps = []
+            self.atoms = []
+            self.embeddings = []
+            base_label = []
+            for k in range(self.num_atoms):
+                idx = index_samples[k]
+                data = prior.__getitem__(idx)
+                graph = data[0]
+                prob = data[1]
+                emb = data[2]
+                gt = data[3]
+                self.size_atoms[k] = graph.size(0)
+                atom = nn.Parameter(graph)
+                embedding = nn.Parameter(emb)
+                self.ps.append(prob)
+                self.atoms.append(atom)
+                self.embeddings.append(embedding)
+                base_label.append(gt[0])
 
             print(self.size_atoms)
             print(base_label)
