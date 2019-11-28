@@ -2,7 +2,7 @@
 
 This package includes the implementation of my AAAI 2020 work **"Gromov-Wasserstein Factorization Models for Graph Clustering"** [https://arxiv.org/abs/1911.08530]
 
-The examples include the clustering two graph datasets:
+The examples include clustering two graph datasets:
 * AIDS (with node attributes)
 * IMDB-BINARY (without node attributes)
 
