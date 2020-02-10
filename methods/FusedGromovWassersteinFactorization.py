@@ -62,8 +62,8 @@ class FGWF(nn.Module):
         # basis and their node distribution
         if prior is None:
             self.ps = []
-            self.atoms = []
-            self.embeddings = []
+            self.atoms = nn.ParameterList()
+            self.embeddings = nn.ParameterList()
             for k in range(self.num_atoms):
                 atom = nn.Parameter(torch.randn(self.size_atoms[k], self.size_atoms[k]))
                 embedding = nn.Parameter(torch.randn(self.size_atoms[k], self.dim_embedding) / self.dim_embedding)
@@ -99,8 +99,8 @@ class FGWF(nn.Module):
             index_samples = list(range(num_samples))
             random.shuffle(index_samples)
             self.ps = []
-            self.atoms = []
-            self.embeddings = []
+            self.atoms = nn.ParameterList()
+            self.embeddings = nn.ParameterList()
             base_label = []
             for k in range(self.num_atoms):
                 idx = index_samples[k]
@@ -119,7 +119,7 @@ class FGWF(nn.Module):
 
             print(self.size_atoms)
             print(base_label)
-        self.sigmoid = nn.ReLU()
+        self.sigmoid = nn.Sigmoid()
 
     def output_weights(self, idx: int = None):
         if idx is not None:

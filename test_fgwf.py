@@ -30,9 +30,9 @@ gwb_layers = 5
 ot_layers = 30
 
 # alg. params
-size_batch = 1200
+size_batch = 100
 epochs = 10
-lr = 0.5
+lr = 0.1
 weight_decay = 0
 shuffle_data = True
 zeta = None  # the weight of diversity regularizer

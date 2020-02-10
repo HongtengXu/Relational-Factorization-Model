@@ -302,7 +302,8 @@ def sinkhorn_knopp_iteration(cost: np.ndarray, p_s: np.ndarray = None, p_t: np.n
     b = []
     i = 0
     # print(a)
-    while relative_error > error_bound and i < max_iter:
+    # while relative_error > error_bound and i < max_iter:
+    while i < max_iter:
         b = p_t / (np.matmul(kernel.T, a))
         a_new = p_s / np.matmul(kernel, b)
         relative_error = np.sum(np.abs(a_new - a)) / np.sum(np.abs(a))
